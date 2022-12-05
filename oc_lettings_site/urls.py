@@ -6,6 +6,9 @@ import profiles.views
 from lettings.views import home, letting
 from profiles.views import profile
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
@@ -13,4 +16,5 @@ urlpatterns = [
     path('lettings/<int:letting_id>/', letting, name='lettings-detail'),
     path('profiles/index/', profiles.views.index, name='profiles-index'),
     path('profiles/<str:username>/', profile, name='profiles-detail'),
+    path('sentry-debug/', trigger_error),
     ]

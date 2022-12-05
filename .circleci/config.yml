@@ -1,0 +1,79 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: python:3.8-alpine
+    steps:
+      - checkout
+      - run:
+          name: virtual environment
+          command:
+            python -m venv venv &&
+            source venv/bin/activate &&
+            pip install -r requirements.txt
+          when: always
+      - run:
+          name: Linting
+          command:
+            source venv/bin/activate
+            flake8
+          when: always
+      - run:
+          name: tests
+          command:
+            source venv/bin/activate
+            pytest
+          when: always
+  containerize:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Containerize
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            docker build -t image_oc_lettings_site .
+            docker tag image_oc_lettings_site $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
+            docker push $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
+
+
+
+  deploy-production:
+    machine:
+      image: true
+    steps:
+      - checkout
+      - run:
+          name: Deploy Docker image to Heroku
+          command: |
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY 
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_DSN=$SENTRY_DSN 
+
+            
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a $HEROKU_APP_NAME web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a $HEROKU_APP_NAME web
+            
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku run python manage.py migrate -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku run python manage.py loaddata backup.json -a $HEROKU_APP_NAME
+workflows:
+  main:
+    jobs:
+      - build-and-test
+      - containerize:
+          requires:
+            - build-and-test
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - build-and-test
+            - containerize
+          filters:
+            branches:
+              only:
+                - master
