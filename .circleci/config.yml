@@ -41,8 +41,7 @@ jobs:
             docker push $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
 
   deploy-production:
-    machine:
-      image: true
+    machine: true
     steps:
       - checkout
       - run:
