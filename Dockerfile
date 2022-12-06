@@ -11,17 +11,16 @@ ENV PYTHONUNBUFFERED 1
 ENV SENTRY_DSN $SENTRY_DSN
 ENV HEROKU_APP_NAME $HEROKU_APP_NAME
 
+# copy project
+COPY . .
 
 # installations des dependances
 RUN \
   apk add --no-cache postgresql-libs && \
   apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
   python3 -m pip install -r requirements.txt --no-cache-dir && \
-  apk --purge del .build-deps && \
+  apk --purge del .build-deps
 
-
-# copy project
-COPY . .
 
 # port
 EXPOSE 8080
