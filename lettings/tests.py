@@ -19,7 +19,3 @@ def test_letting_detail(client):
     html = response.content.decode()
     expected_content = "title"
     assert expected_content in html
-
-
-
-

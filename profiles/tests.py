@@ -36,4 +36,3 @@ class TestProfiles:
         expected_content = "title"
         assert response.status_code == 200
         assert expected_content in html
-
