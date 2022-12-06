@@ -6,7 +6,7 @@ orbs:
 jobs:
   build-and-test:
     docker:
-      - image: python:3.8-alpine
+      - image: cimg/python:3.10.2
     steps:
       - checkout
       - run:
@@ -45,7 +45,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy Docker image to Heroku
+          name: Deploy to Heroku
           command: |
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             
@@ -59,7 +59,7 @@ jobs:
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py migrate -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py loaddata backup.json -a $HEROKU_APP_NAME
 workflows:
-  oc-lettings:
+  main:
     jobs:
       - build-and-test
       - containerize:
