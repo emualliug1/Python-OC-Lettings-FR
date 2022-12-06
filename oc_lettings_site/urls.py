@@ -6,8 +6,10 @@ import profiles.views
 from lettings.views import home, letting
 from profiles.views import profile
 
+
 def trigger_error(request):
     division_by_zero = 1 / 0
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
