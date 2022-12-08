@@ -6,7 +6,7 @@ from .models import Address, Letting
 class LettingsTest(TestCase):
 
     def setUp(self):
-        self.address = Address.objects.create(
+        self.test = Address.objects.create(
             number=77,
             street="test",
             city="test",
@@ -14,7 +14,7 @@ class LettingsTest(TestCase):
             zip_code=44000,
             country_iso_code="FRA"
         )
-        self.letting = Letting.objects.create(title="Test Letting", address=self.address)
+        self.letting = Letting.objects.create(title="Test Letting", address=self.test)
 
     def test_lettings_index(self):
         url = reverse('lettings:index')

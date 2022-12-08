@@ -16,6 +16,11 @@ class ProfilesTest(TestCase):
         )
         self.profile = Profile.objects.create(user=self.user, favorite_city="Paris")
 
+    def test_setup(self):
+        test_user = User.objects.get(username='TestUser')
+
+        assert test_user in User.objects.all()
+
     def test_profiles_index(self):
         url = reverse('profiles:index')
         response = self.client.get(url)
@@ -26,7 +31,8 @@ class ProfilesTest(TestCase):
 
     def test_profile_detail(self):
         url = reverse('profiles:profile', args=["TestUser"])
-        response = self.client.get(url)
+        url2 = '/profiles/TestUser/'
+        response = self.client.get(url2)
         html = response.content.decode()
         expected_content = "<title>TestUser</title>"
         assert response.status_code == 200
