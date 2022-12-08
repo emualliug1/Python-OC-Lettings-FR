@@ -31,5 +31,3 @@ class LettingsTest(TestCase):
         expected_content = "<h1>Test Letting</h1>"
         assert response.status_code == 200
         assert expected_content in html
-
-
