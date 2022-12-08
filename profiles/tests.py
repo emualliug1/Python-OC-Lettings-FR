@@ -30,7 +30,7 @@ class ProfilesTest(TestCase):
         assert expected_content in html
 
     def test_profile_detail(self):
-        url = reverse('profiles:profile', args=["TestUser"])
+        # url = reverse('profiles:profile', args=["TestUser"])
         url2 = '/profiles/TestUser/'
         response = self.client.get(url2)
         html = response.content.decode()
