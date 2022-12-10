@@ -1,7 +1,7 @@
 import os
 import environ
 from django.core.management.utils import get_random_secret_key
-import dj_database_url
+import django_heroku
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -68,8 +68,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
     }
 }
-data_base_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(data_base_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -110,6 +108,8 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+django_heroku.settings(locals())
 
 # Sentry configuration
 sentry_sdk.init(
