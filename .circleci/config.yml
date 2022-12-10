@@ -53,7 +53,7 @@ jobs:
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a $HEROKU_APP_NAME web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a $HEROKU_APP_NAME web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py migrate -a $HEROKU_APP_NAME
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py loaddata backup.json -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py loaddata db_data/test.json -a $HEROKU_APP_NAME
 workflows:
   main:
     jobs:
