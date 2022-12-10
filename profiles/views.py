@@ -21,6 +21,6 @@ def profile(request, username):
     # it. Nam aliquam dignissim congue.
     # Pellentesque habitant morbi tristique senectus et netus et males
     """
-    profile_detail = Profile.objects.get(user__username=username)
-    context = {'profile_detail': profile_detail}
+    profile = Profile.objects.get(user__username=username)
+    context = {'profile': profile}
     return render(request, 'profiles/profile.html', context)
