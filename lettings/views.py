@@ -46,9 +46,9 @@ def letting(request, letting_id):
     # Mauris condimentum auctor elementum. Donec quis nisi ligula.
     # Integer vehicula tincidunt enim, ac lacinia augue pulvinar sit amet.
     """
-    letting_detail = Letting.objects.get(id=letting_id)
+    letting = Letting.objects.get(id=letting_id)
     context = {
-        'title': letting_detail.title,
-        'address': letting_detail.address,
+        'title': letting.title,
+        'address': letting.address,
     }
     return render(request, 'lettings/letting.html', context)
