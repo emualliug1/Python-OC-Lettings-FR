@@ -1,9 +1,9 @@
 import os
 import environ
 from django.core.management.utils import get_random_secret_key
-import django_heroku
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -13,7 +13,7 @@ env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY', default=get_random_secret_key())
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', f'{env("HEROKU_APP_NAME")}.herokuapp.com']
 
 # Application definition
 
@@ -69,6 +69,9 @@ DATABASES = {
     }
 }
 
+db_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_env)
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -109,7 +112,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-django_heroku.settings(locals())
 
 # Sentry configuration
 sentry_sdk.init(
