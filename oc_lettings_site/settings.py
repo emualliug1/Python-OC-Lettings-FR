@@ -13,7 +13,7 @@ env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY', default=get_random_secret_key())
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['orange-county-letting.herokuapp.com']
 
 # Application definition
 
