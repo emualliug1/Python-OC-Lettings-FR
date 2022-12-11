@@ -9,6 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV SENTRY_DSN $SENTRY_DSN
 ENV HEROKU_APP_NAME $HEROKU_APP_NAME
+ENV PORT 8080
 
 # install dependencies
 RUN pip install --upgrade pip
@@ -26,8 +27,5 @@ RUN \
 # copy project
 COPY . /usr/src/app
 
-# port
-EXPOSE 8080
 
-
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:$PORT"]
