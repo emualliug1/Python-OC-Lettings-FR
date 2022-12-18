@@ -10,6 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV SENTRY_DSN $SENTRY_DSN
 ENV HEROKU_APP_NAME $HEROKU_APP_NAME
+ENV PORT 8080
 
 COPY . .
 
@@ -22,8 +23,5 @@ RUN \
   python3 manage.py collectstatic --noinput --clear
 
 
-# port
-EXPOSE 8080
-
 # lancement du projet
-CMD python manage.py runserver 0.0.0.0:8080
+CMD python manage.py runserver 0.0.0.0:$PORT
