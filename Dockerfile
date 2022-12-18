@@ -25,9 +25,6 @@ RUN \
 # copie du projet
 COPY . /usr/src/app
 
-# copie des fichiers static du projet
-RUN python3 manage.py collectstatic --noinput --clear
-
 # port
 EXPOSE 8080
 
