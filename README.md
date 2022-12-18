@@ -117,24 +117,25 @@ Pour faire fonctionner le déploiement de cette application il est nécessaires 
 ### Description
 Le déploiement de l'application est automatisé par un pipeline CircleCI.
 
-Si des modifications sont apportées à la branche master:
+Si des modifications sont apportées à la branche master :
 
 1) Lancement du linting et des tests. 
 2) Création d'une image Docker et dépôt sur le DockerHub. 
 3) Déploiement de l'application sur Heroku.
 
-si une des étapes suivante echoue le déploiement est arrêté
+si une des étapes suivante échoue le déploiement est arrêté
 
 ### CircleCI
 
-Créer les variables d'envrionnements suivantes dans le projet CirclecCi:
+Créer les variables d'environnements suivant dans le projet CircleCi :
 
 <p align="center">
   <img src="img/env.png" alt="env">
 </p>
 
 ### Heroku
-installation de gunicorn:
+
+Installation de gunicorn :
   pip install gunicorn
 Ne pas oublier de créer le Procfile à la racine du projet:
 `web: gunicorn oc_lettings_site.wsgi --bind=0.0.0.0:$PORT`
@@ -142,6 +143,7 @@ Ne pas oublier de créer le Procfile à la racine du projet:
 <hr>
 
 # Lancement
+
 - Allez sur `https://<heroku-app-name>.herokuapp.com`
 - Naviguez jusqu'à `https://<heroku-app-name>.herokuapp.com/sentry-debug`, ceci devrait déclencher une erreur dans sentry.
 - Naviguez jusqu'au panneau d'administration `https://<heroku-app-name>.herokuapp.com/admin` 
