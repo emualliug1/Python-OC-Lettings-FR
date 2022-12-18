@@ -1,3 +1,7 @@
+<div style="text-align: center;"><img src="img/logo.png" alt="logo">
+</div>
+<hr>
+
 ## Résumé
 
 Site web d'Orange County Lettings
