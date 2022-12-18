@@ -3,6 +3,7 @@
 </p>
 <hr>
 
+
 ## Résumé
 
 Site web d'Orange County Lettings
@@ -80,3 +81,71 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+### Docker
+
+#### local
+
+- Télécharger et installer [Docker](https://docs.docker.com/get-docker/)
+- Se rendre dans le repertoire du projet `cd /path/to/Python-OC-Lettings-FR`
+- Créer l'image `docker build -t <image-name> .` 
+- Lancer le conteneur `docker run -d -p 8080:8080 <image-name>`
+- Lancer un navigateur avec l'adresse http://127.0.0.1:8080/
+
+#### hub
+
+- Utiliser la commande `docker login`
+- Tager l'image avec `docker tag <dockerhub username>/<dockerhub name>:<tagname>`
+- Envoyer l'image sur le Hub avec `docker push <dockerhub username>/<dockerhub name>:<tagname>`
+
+- Télécharger une image du Hub avec ©docker pull <dockerhub username>/<dockerhub name>:<tagname>`
+- Lancer l'image avec `docker run -d -p 8000:8000 <dockerhub username>/<dockerhub name>:<tagname>`
+- Lancer un navigateur avec l'adresse http://127.0.0.1:8080/
+
+<hr>
+
+# Déploiement
+
+### Obligatoire
+Pour faire fonctionner le déploiement de cette application il est nécessaires d'avoir les comptes suivant
+- Compte [GitHub](https://github.com/)
+- Compte [CircleCI](https://circleci.com) 
+- Compte [Docker](https://www.docker.com)
+- Compte [Heroku](https://www.heroku.com)
+- Compte [Sentry](https://sentry.io/welcome/)
+
+### Description
+Le déploiement de l'application est automatisé par un pipeline CircleCI.
+
+Si des modifications sont apportées à la branche master:
+
+1) Lancement du linting et des tests. 
+2) Création d'une image Docker et dépôt sur le DockerHub. 
+3) Déploiement de l'application sur Heroku.
+
+si une des étapes suivante echoue le déploiement est arrêté
+
+### CircleCI
+
+Créer les variables d'envrionnements suivantes dans le projet CirclecCi:
+
+<p align="center">
+  <img src="img/env.png" alt="env">
+</p>
+
+### Heroku
+installation de gunicorn:
+  pip install gunicorn
+Ne pas oublier de créer le Procfile à la racine du projet:
+`web: gunicorn oc_lettings_site.wsgi --bind=0.0.0.0:$PORT`
+
+<hr>
+
+# Lancement
+- Allez sur `https://<heroku-app-name>.herokuapp.com`
+- Naviguez jusqu'à `https://<heroku-app-name>.herokuapp.com/sentry-debug`, ceci devrait déclencher une erreur dans sentry.
+- Naviguez jusqu'au panneau d'administration `https://<heroku-app-name>.herokuapp.com/admin` 
+- Connectez-vous avec le compte `admin`, mot de passe `Abc1234!`
+
+
+
