@@ -136,8 +136,10 @@ Créer les variables d'environnements suivant dans le projet CircleCi :
 ### Heroku
 
 Installation de gunicorn :
-  pip install gunicorn
-Ne pas oublier de créer le Procfile à la racine du projet:
+  `pip install gunicorn`
+
+Ne pas oublier de créer le Procfile à la racine du projet : 
+
 `web: gunicorn oc_lettings_site.wsgi --bind=0.0.0.0:$PORT`
 
 <hr>
@@ -145,9 +147,7 @@ Ne pas oublier de créer le Procfile à la racine du projet:
 # Lancement
 
 - Allez sur `https://<heroku-app-name>.herokuapp.com`
-- Naviguez jusqu'à `https://<heroku-app-name>.herokuapp.com/sentry-debug`, ceci devrait déclencher une erreur dans sentry.
-- Naviguez jusqu'au panneau d'administration `https://<heroku-app-name>.herokuapp.com/admin` 
+- Naviguez jusqu'à :`https://<heroku-app-name>.herokuapp.com/sentry-debug` 
+ceci devrait déclencher une erreur dans sentry.
+- Naviguez jusqu'au panneau d'administration :`https://<heroku-app-name>.herokuapp.com/admin` 
 - Connectez-vous avec le compte `admin`, mot de passe `Abc1234!`
-
-
-
