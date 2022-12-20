@@ -87,7 +87,7 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 #### local
 
 - Télécharger et installer [Docker](https://docs.docker.com/get-docker/)
-- Se rendre dans le repertoire du projet `cd /path/to/Python-OC-Lettings-FR`
+- Se rendre dans le répertoire du projet `cd /path/to/Python-OC-Lettings-FR`
 - Créer l'image `docker build -t <image-name> .` 
 - Lancer le conteneur `docker run -d -p 8080:8080 <image-name>`
 - Lancer un navigateur avec l'adresse http://127.0.0.1:8080/
@@ -98,7 +98,7 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 - Tager l'image avec `docker tag <dockerhub username>/<dockerhub name>:<tagname>`
 - Envoyer l'image sur le Hub avec `docker push <dockerhub username>/<dockerhub name>:<tagname>`
 
-- Télécharger une image du Hub avec ©docker pull <dockerhub username>/<dockerhub name>:<tagname>`
+- Télécharger une image du Hub avec : `docker pull <dockerhub username>/<dockerhub name>:<tagname>`
 - Lancer l'image avec `docker run -d -p 8000:8000 <dockerhub username>/<dockerhub name>:<tagname>`
 - Lancer un navigateur avec l'adresse http://127.0.0.1:8080/
 
