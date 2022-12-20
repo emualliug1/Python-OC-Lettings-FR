@@ -107,7 +107,7 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 # Déploiement
 
 ### Obligatoire
-Pour faire fonctionner le déploiement de cette application il est nécessaires d'avoir les comptes suivant
+Pour faire fonctionner le déploiement de cette application il est nécessaire d'avoir les comptes suivants
 - Compte [GitHub](https://github.com/)
 - Compte [CircleCI](https://circleci.com) 
 - Compte [Docker](https://www.docker.com)
@@ -123,11 +123,11 @@ Si des modifications sont apportées à la branche master :
 2) Création d'une image Docker et dépôt sur le DockerHub. 
 3) Déploiement de l'application sur Heroku.
 
-si une des étapes suivante échoue le déploiement est arrêté
+Si une des étapes suivantes échoue le déploiement est arrêté.
 
 ### CircleCI
 
-Créer les variables d'environnements suivant dans le projet CircleCi :
+Créer les variables d'environnement suivant dans le projet CircleCi :
 
 <p align="center">
   <img src="img/env.png" alt="env">
